@@ -4,6 +4,16 @@ FROM python:3.11-slim
 # 设置工作目录
 WORKDIR /app
 
+# 安装必要的系统依赖，包括 MySQL 开发库和头文件
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    default-libmysqlclient-dev \
+    libssl-dev \
+    libffi-dev \
+    python-dev \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
 # 安装 PDM
 RUN pip install --no-cache-dir pdm
 
