@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/* \
 
 # 安装 PDM
-RUN pip install --no-cache-dir pdm
+RUN pip install pdm
 
 # 将 PDM 二进制文件添加到 PATH 环境变量
 ENV PATH="/root/.local/bin:$PATH"
