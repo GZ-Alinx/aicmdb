@@ -9,12 +9,14 @@ RUN apt-get update && apt-get install -y \
     pkg-config \
     clang \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+
 RUN pip install --user pdm
 ENV PATH="/root/.local/bin:$PATH"
 COPY pyproject.toml pdm.lock ./
 RUN pdm install --prod --no-lock --no-editable
 COPY . .
 EXPOSE 8080
-
-#CMD ["pdm", "run", "python", "manager.py", "runserver"]
+ENTRYPOINT ["pdm", "run", "python", "-m", "main"]
+# 设置默认参数，可以被 docker run 时的参数覆盖
+CMD ["--dev"]

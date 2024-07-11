@@ -92,7 +92,7 @@ DATABASES = {
         'NAME': "aicmdb",
         'USER': "root",
         'PASSWORD': "adl1314520",
-        'HOST': "127.0.0.1",
+        'HOST': "45.207.47.130",
         'PORT': 3306
     }
 }
