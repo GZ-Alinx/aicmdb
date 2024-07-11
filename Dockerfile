@@ -20,4 +20,4 @@ EXPOSE 8080
 #ENTRYPOINT ["pdm", "run", "python", "manage.py", "runserver"]
 ENTRYPOINT ["pdm", "run", "python", "manage.py"]
 # 设置默认参数，可以被 docker run 时的参数覆盖
-CMD ["runservers"]
+CMD ["runserver"]
