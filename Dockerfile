@@ -17,6 +17,6 @@ COPY pyproject.toml pdm.lock ./
 RUN pdm install --prod --no-lock --no-editable
 COPY . .
 EXPOSE 8080
-ENTRYPOINT ["pdm", "run", "python", "-m", "main"]
+ENTRYPOINT ["pdm", "run", "python", "runserver"]
 # 设置默认参数，可以被 docker run 时的参数覆盖
-CMD ["--dev"]
+#CMD ["--dev"]
