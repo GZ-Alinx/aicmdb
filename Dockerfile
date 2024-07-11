@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y \
     libffi-dev \
     python3-dev \
     pkg-config \
+    clang \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
