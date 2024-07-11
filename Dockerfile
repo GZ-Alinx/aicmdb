@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y \
     default-libmysqlclient-dev \
     libssl-dev \
     libffi-dev \
-    python-dev \
+    python3-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
