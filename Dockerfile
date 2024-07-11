@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y \
     pkg-config \
     clang \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN pip install --user pdm
 ENV PATH="/root/.local/bin:$PATH"
