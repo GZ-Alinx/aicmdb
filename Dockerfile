@@ -16,16 +16,17 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # 安装 PDM
-RUN pip install pdm
+RUN pip install --user pdm
 
 # 将 PDM 二进制文件添加到 PATH 环境变量
 ENV PATH="/root/.local/bin:$PATH"
 
+RUN whoami && ls /root/.local/bin
 # 复制 pyproject.toml 和 pdm.lock 文件到工作目录
 COPY pyproject.toml pdm.lock ./
 
 # 安装项目依赖
-RUN /root/.local/bin/pdm install --prod --no-lock --no-editable
+RUN pdm install --prod --no-lock --no-editable
 
 # 复制应用程序代码到工作目录
 COPY . .
