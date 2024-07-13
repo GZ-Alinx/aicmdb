@@ -63,3 +63,9 @@ class ResetPwdSerializer(serializers.Serializer):
         if pwd1 != pwd2:
             raise exceptions.ValidationError("两个新密码不一致！")
         return attrs
+
+
+class UserInfoSerializer(serializers.Serializer):
+    class Meta:
+        userinfo = AIUser
+        fields = "__all__"

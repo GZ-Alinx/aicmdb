@@ -86,13 +86,26 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# remote
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': "aicmdb",
+#         'USER': "root",
+#         'PASSWORD': "adl1314520",
+#         'HOST': "45.207.47.130",
+#         'PORT': 3306
+#     }
+# }
+
+# local
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': "aicmdb",
         'USER': "root",
         'PASSWORD': "adl1314520",
-        'HOST': "45.207.47.130",
+        'HOST': "127.0.0.1",
         'PORT': 3306
     }
 }

@@ -1,10 +1,12 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
-from .serializers import LoginSerializer, UserSerializer, ResetPwdSerializer
+from .serializers import LoginSerializer, UserSerializer, ResetPwdSerializer, UserInfoSerializer
 from datetime import datetime
 from .authentications import generate_jwt
 from rest_framework.response import Response
 from rest_framework import status
+from .models import AIUser
+from rest_framework.status import HTTP_404_NOT_FOUND
 # from rest_framework.permissions import IsAuthenticated
 
 
@@ -43,8 +45,37 @@ class ResetPassword(APIView):
             pwd1 = serializer.validated_data.get('pwd1')
             request.user.set_password(pwd1)
             request.user.save()
-            return Response({'msg':'密码修改成功'})
+            return Response({'msg': '密码修改成功'})
         else:
             print(serializer.errors)
             detail = list(serializer.errors.values())[0][0]
             return Response({'detail': detail}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UserManager(APIView):
+    # 用户管理视图
+
+    def get_object(self, pk):
+        try:
+            return AIUser.objects.get(pk=pk)
+        except AIUser.DoesNotExist:
+            raise HTTP_404_NOT_FOUND
+
+    def get(self, request, pk=None):
+        if pk:
+            user = self.get_object(pk=pk)
+            serializer = UserSerializer(user)
+            return Response(serializer.data)
+        else:
+            users = AIUser.objects.all()
+            serializer = UserSerializer(instance=users, many=True)
+            return Response(serializer.data)
+
+    def post(self, request, pk):
+        user = self.get_object(pk)
+        serializer = UserSerializer(user, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
